@@ -1,10 +1,13 @@
-# [Título del trabajo]
+# [Puertergeist]
 
 [Descripción breve del proyecto a realizar (2-3 frases).]
 
 ## Integrantes del equipo
 
-[Nombres, apellidos, y usuario GitHub de los integrantes del equipo.]
+- Diego Medina Espinosa (usuario_github_a_introducir)
+- María Victoria Herranz Chamorro (mvictoria-upm)
+- Pablo Huete Serrano (usuario_github_a_introducir)
+- Ángel Luis Olmedo Velasco (usuario_github_a_introducir)
 
 ## Objetivos del trabajo
 
