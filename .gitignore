@@ -34,10 +34,6 @@
 *.app
 *.i*86
 *.x86_64
-
-# Code::Block files
-*.cbp
-*.depend
 *.hex
 
 # Debug files
@@ -54,3 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Code::Block files
+*.cbp
+*.depend
