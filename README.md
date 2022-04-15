@@ -7,7 +7,7 @@
 - Diego Medina Espinosa Diego105(d.medinae@alumnos.upm.es)
 - María Victoria Herranz Chamorro (mvictoria-upm)
 - Pablo Huete Serrano (usuario_github_a_introducir)
-- Ángel Luis Olmedo Velasco (al.olmedo@alumnos.upm.es)
+- Ángel Luis Olmedo Velasco (angelolmedo20)
 
 ## Objetivos del trabajo
 
