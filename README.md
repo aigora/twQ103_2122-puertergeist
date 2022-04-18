@@ -4,7 +4,7 @@
 
 ## Integrantes del equipo
 
-- Diego Medina Espinosa Diego105(d.medinae@alumnos.upm.es)
+- Diego Medina Espinosa (Diego105)
 - María Victoria Herranz Chamorro (mvictoria-upm)
 - Pablo Huete Serrano (usuario_github_a_introducir)
 - Ángel Luis Olmedo Velasco (angelolmedo20)
