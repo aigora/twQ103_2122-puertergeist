@@ -1,0 +1,9 @@
+/* Formato CSV estadisticas */
+/* ------ */
+/* Single */
+/* single;Posicion;Nombre_Jugador;puntuacion;tiempo(segundos) */
+1;1;Juan Nadie;320;3215
+/* ------ */
+/* Dobles */
+/* dobles;Posicion;Nombre_Jugador;puntuacion;tiempo;Nombre_Oponente;puntuacion;tiempo */
+2;1;Juan Nadie;320;3215;Pedro Garcia;300;3500
