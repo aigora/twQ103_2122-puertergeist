@@ -1,0 +1,3 @@
+/* Formato CSV preguntas */
+/* dificultad (1 = facil, 2 = dificil);pregunta;respuesta1;respuesta2;respuesta3;respuesta4;respuesta_correcta (1, 2, 3 o 4) */
+1;¿De qué color es el caballo blanco de Santiago?;Verde;Rojo;Blanco;Vlanco;3
