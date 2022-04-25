@@ -6,6 +6,37 @@
 #define SALIR           4
 
 
+/* Estructuras */
+struct Pregunta {
+	int dificultad;
+	char pregunta[256];
+	char respuesta_posible[4][64];
+	int respuesta_correcta;
+};
+
+struct Jugador {
+	char nombre[64];
+	int puntuacion;
+	int tiempo_parcial[3];
+	int tiempo_final;
+}
+
+struct Puntuaciones {
+	Jugador top10_jugadores_single[10];
+	Jugador top10_jugadores_dobles[2][10];
+}
+
+/* Declaracion de Funciones auxiliares */
+int Banner(void);
+int Banner_Salir(void);
+Pregunta LeerPreguntaCSV(int dificultad);
+int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores);
+Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores);
+int ComenzarJuego(int num_jugadores);
+int LeerEstadisticas(void);
+int Salir(void);
+
+/* Funcion principal */
 int main()
 {
 
@@ -56,7 +87,7 @@ int main()
             }
             default:
             {
-                printf ("\nOpci%cn erronea. Por favor, introduce 1, 2, 3 o 4:\n", 162); // Numero ASCII para ó
+                printf("\nOpci%cn erronea. Por favor, introduce 1, 2, 3 o 4:\n", 162); // Numero ASCII para ó
                 scanf("%d", &inicio_eleccion);
                 fflush(stdin);
             }
@@ -65,4 +96,45 @@ int main()
     while(inicio_correcto != 1);
 
     return 0;
+}
+
+/* Definicion de funciones auxiliares */
+int Banner(void)
+{
+	
+}
+
+int Banner_Salir(void)
+{
+	
+}
+
+Pregunta LeerPreguntaCSV(int dificultad)
+{
+	
+}
+
+int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores)
+{
+	
+}
+
+Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
+{
+	
+}
+
+int ComenzarJuego(int num_jugadores)
+{
+	
+}
+
+int LeerEstadisticas(void)
+{
+	
+}
+
+int Salir(void)
+{
+	
 }
