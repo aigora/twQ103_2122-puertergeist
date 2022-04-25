@@ -6,7 +6,7 @@
 
 - Diego Medina Espinosa (Diego105)
 - María Victoria Herranz Chamorro (mvictoria-upm)
-- Pablo Huete Serrano (usuario_github_a_introducir)
+- Pablo Huete Serrano (PabloHuete)
 - Ángel Luis Olmedo Velasco (angelolmedo20)
 
 ## Objetivos del trabajo
