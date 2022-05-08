@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define UN_JUGADOR      1
 #define DOS_JUGADORES   2
@@ -8,7 +10,7 @@
 
 /* Estructuras */
 struct Pregunta {
-	int dificultad;
+	int numero_pregunta;
 	char pregunta[256];
 	char respuesta_posible[4][64];
 	int respuesta_correcta;
@@ -19,19 +21,19 @@ struct Jugador {
 	int puntuacion;
 	int tiempo_parcial[3];
 	int tiempo_final;
-}
+};
 
 struct Puntuaciones {
 	Jugador top10_jugadores_single[10];
 	Jugador top10_jugadores_dobles[2][10];
-}
+};
 
 /* Declaracion de Funciones auxiliares */
 int Banner(void);
 int Banner_Salir(void);
-Pregunta LeerPreguntaCSV(int dificultad);
+struct Pregunta LeerPreguntaCSV(int dificultad);
 int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores);
-Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores);
+struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores);
 int ComenzarJuego(int num_jugadores);
 int LeerEstadisticas(void);
 int Salir(void);
@@ -109,9 +111,190 @@ int Banner_Salir(void)
 	
 }
 
-Pregunta LeerPreguntaCSV(int dificultad)
+static unsigned int ContadorLineas(int dificultad)
 {
-	
+    int contador_lineas = 0;
+    int caracter;
+
+    /* Abrimos el archivo en modo lectura */
+    FILE *fichero_preguntas;
+    fichero_preguntas = fopen("preguntas.txt","r");
+    if (fichero_preguntas == NULL)
+    {
+        printf("Error en la lectura del fichero preguntas.txt. Fin del programa\n");
+        return 0;
+    }
+
+    /* Contamos cuantas preguntas son de la dificultad seleccionada */
+    do
+    {
+        caracter = fgetc(fichero_preguntas);
+        if (dificultad == 1)
+        {
+            if (caracter == 35) /* 35 es el caracter # en ASCII */
+            {
+                contador_lineas++;
+            }
+        }
+        else
+        {
+            if (caracter == 36) /* 36 es el $ en ASCII */
+            {
+                contador_lineas++;
+            }
+        }
+    }
+    while (caracter != EOF);
+
+    /* Cerramos el fichero */
+    fclose(fichero_preguntas);
+
+    return contador_lineas;
+}
+
+static struct Pregunta LeerPregunta(int dificultad, int num_aleatorio)
+{
+    int pregunta_detectada = 0, contador_preguntas = 0, contador_separador = 0, i = 0, j = 0, k = 0, l = 0, m = 0, n = 0;
+    int caracter;
+    struct Pregunta pregunta_seleccionada;
+
+    /* Abrimos el archivo en modo lectura */
+    FILE *fichero_preguntas;
+    fichero_preguntas = fopen("preguntas.txt","r");
+    if (fichero_preguntas == NULL) {
+        printf("Error en la lectura del fichero preguntas.txt. Fin del programa\n");
+        return pregunta_seleccionada;
+    }
+
+    /* Nos situamos en la pregunta aleatoria seleccionada */
+    while (pregunta_detectada == 0)
+    {
+        caracter = fgetc(fichero_preguntas);
+        if (dificultad == 1)
+        {
+            if (caracter == 35) /* 35 es el caracter # en ASCII */
+            {
+                contador_preguntas++;
+                if (contador_preguntas == num_aleatorio)
+                {
+                    pregunta_detectada = 1;
+                }
+            }
+        }
+        else
+        {
+            if (caracter == 36) /* 36 es el $ en ASCII */
+            {
+                contador_preguntas++;
+                if (contador_preguntas == num_aleatorio)
+                {
+                    pregunta_detectada = 1;
+                }
+            }
+        }
+    }
+
+    /* Leemos los datos de la pregunta */
+    while (1)
+    {
+        caracter = fgetc(fichero_preguntas);
+        if (caracter == ';')
+        {
+            contador_separador++;
+            caracter = fgetc(fichero_preguntas);
+        }
+
+        if (caracter == 10) /* 10 es el caracter '\n' en ASCII */
+        {
+            break;
+        }
+
+        switch (contador_separador)
+        {
+            case 0:
+            {
+                break;
+            }
+            case 1:
+            {
+                pregunta_seleccionada.pregunta[i] = caracter;
+                i++;
+                break;
+            }
+            case 2:
+            {
+                if (j == 0)
+                {
+                    pregunta_seleccionada.pregunta[i] = '\0';
+                }
+                pregunta_seleccionada.respuesta_posible[0][j] = caracter;
+                j++;
+                break;
+            }
+            case 3:
+            {
+                if (k == 0)
+                {
+                    pregunta_seleccionada.respuesta_posible[0][j] = '\0';
+                }
+                pregunta_seleccionada.respuesta_posible[1][k] = caracter;
+                k++;
+                break;
+            }
+            case 4:
+            {
+                if (l == 0)
+                {
+                    pregunta_seleccionada.respuesta_posible[1][k] = '\0';
+                }
+                pregunta_seleccionada.respuesta_posible[2][l] = caracter;
+                l++;
+                break;
+            }
+            case 5:
+            {
+                if (m == 0)
+                {
+                    pregunta_seleccionada.respuesta_posible[2][l] = '\0';
+                }
+                pregunta_seleccionada.respuesta_posible[3][m] = caracter;
+                m++;
+                break;
+            }
+            case 6:
+            {
+                if (n == 0)
+                {
+                    pregunta_seleccionada.respuesta_posible[3][m] = '\0';
+                }
+                pregunta_seleccionada.respuesta_correcta = caracter - 48; /* conversion ASCII a numero */
+                n++;
+                break;
+            }
+        }
+    }
+    /* Cerramos el fichero */
+    fclose(fichero_preguntas);
+
+    return pregunta_seleccionada;
+}
+
+struct Pregunta LeerPreguntaCSV(int dificultad)
+{
+    struct Pregunta pregunta_seleccionada;
+    unsigned int num_lineas = 0, numero_aleatorio;
+
+    /* Calculamos el numero de preguntas de la misma dificultad */
+    num_lineas = ContadorLineas(dificultad);
+
+    /* Seleccionamos una pregunta de manera aletoria */
+    srand(time(NULL)); /* generamos la semilla aleatoria */
+    numero_aleatorio = (rand() % num_lineas) + 1; /* obtenemos un valor aleatorio entre 1 y num_lineas */
+
+    /* Leemos la pregunta seleccionada */
+    pregunta_seleccionada = LeerPregunta(dificultad, numero_aleatorio);
+
+    return pregunta_seleccionada;
 }
 
 int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores)
@@ -119,7 +302,7 @@ int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores)
 	
 }
 
-Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
+struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
 {
 	
 }
