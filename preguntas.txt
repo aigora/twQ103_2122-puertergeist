@@ -1,3 +1,22 @@
-/* Formato CSV preguntas */
-/* dificultad (1 = facil, 2 = dificil);pregunta;respuesta1;respuesta2;respuesta3;respuesta4;respuesta_correcta (1, 2, 3 o 4) */
-1;¿De qué color es el caballo blanco de Santiago?;Verde;Rojo;Blanco;Vlanco;3
+$;En el remake de que pelicula de terror japonesa sale Sarah Michelle Gellar?;El grito;The ring;La llamada;La huella;1
+#;En que pelicula se dice la siguiente frase?: 'Y yo soy el Diablo, ahora suelta estas malditas correas';Expediente Warren;La semilla del diablo;El exorcista;El exorcismo de Emily Rose;3
+$;Como se llama el diablo que es el principal villano de la saga 'Expediente Warren'?;Valad;Valam:Valak;Vakal;3
+$;Cuantas entregas tiene la saga de 'La matanza de Texas'?;9;7;6;4;1
+#;En el comienzo de 'El sexto sentido', quien es el que dispara a Malcolm Crowe (Bruce Willis)?;Un ladron;Un antiguo paciente;Su propia esposa;No llega a saberse;2
+$;Como se llama el demonio de la saga 'Paranormal Activity'?;Tobi;Valak;Karras;Luci;1
+#;Como se llama la chica demoniaca del 'remake' estadounidense de 'The Ring'?;Samara;Sarah;Santana;Samantha;1
+$;Cuantas partes hay de la famosa pelicula It?;Una;Dos;Tres;Cinco;2
+#;Donde sale la famosa frase 'En ocasiones veo muertos'?;El sexto sentido;El resplandor;Poltergeist;El exorcista;1
+#;Que frase dice siempre el muñeco de Saw antes de jugar?;Voy a proponerte algo que no podras rechazar;Jugar o morir, tu eliges;Quieres jugar a un juego?;Es la hora de jugar;3
+#;En que pelicula gastan una broma a la protagonista cubriendola de pintura roja?;It;El exorcismo de Emily Rose;Carrie;Poltergeist;3
+$;Existe una serie llamada 'El exorcista'?;No;Si;Esta rodandose;Hay dos series llamadas asi;2
+$;Cuantas peliculas de Insidious hay?;4;5;3;2;1
+#;Como llegan a su siniestro destino los protagonistas de 'Terror.app'?;Con un mapa antiguo;Son secuestrados y despiertan alli;A traves de una app del movil;Por sorteo;3
+$;Estrenada en 1896 y con una duracion de tan solo 3 minutos, la primera pelicula de terror se realizo en:;EEUU;Alemania;Francia;Inglaterra;3
+$;Cual fue la primera pelicula de terror en ser nominada a Mejor Pelicula en los premios de la Academia?;The Babadook;El exorcista;La cosa;El resplandor;2
+#;Despues de aparecer en varios festivales de terror en los años 70 y 80, a que actriz suele llamarse la 'reina del terror' original?;Jamie Lee Curtis;Linnea Quigley;Neve Campbell;Sissy Spacek;1
+#;En que película se pronuncio la famosa frase: 'Te gustan la peliculas de terror?';Se lo que hicisteis el ultimo verano;Scream;Viernes 13;Destino final;2
+#;'El despertar del Diablo','La Cabaña Sangrienta' y 'Misery' tienen algo en común que se ha convertido en una trama clasica de peliculas de terror;Una casa encantada;Locos que se escapan de manicomios;Personas atrapadas en un lugar aislado;No tienen nada en comun;3
+$;Los zombis se han convertido en algo habitual en el genero del terror. En que pelicula aparecieron los primeros zombis canibales?;Zombi blanco;El valle de los zombis;La noche de los muertos vivientes;El ejército de las tinieblas;3
+$;Que saga de peliculas de terror dicen que era maldita despues de una serie de accidentes y tragedias en las que se vieron implicados actores en varias peliculas?;Alien;Poltergeist;Hostel;Carrie;2
+#;El clasico japones 'Ringu' (y su remake en Hollywood 'The ring') se centra alrededor de un artilugio maldito. Cual?;Una cinta de video;Un DVD;Un movil;Un libro;1
