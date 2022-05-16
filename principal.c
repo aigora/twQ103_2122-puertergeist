@@ -32,7 +32,7 @@ struct Puntuaciones {
 int Banner(void);
 int Banner_Salir(void);
 struct Pregunta LeerPreguntaCSV(int dificultad);
-int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores);
+int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores);
 struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores);
 int ComenzarJuego(int num_jugadores);
 int LeerEstadisticas(void);
@@ -297,9 +297,65 @@ struct Pregunta LeerPreguntaCSV(int dificultad)
     return pregunta_seleccionada;
 }
 
-int EscribirPuntuacionJugadoresCSV(Jugador jug[2], int num_jugadores)
+int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores)
 {
-	
+    /* buffer para convertir enteros a cadena de caracteres */
+    char buffer[128];
+
+    /* Abrimos el archivo en modo escritura, posicionandonos al final del archivo */
+    FILE *fichero_puntuaciones;
+    fichero_puntuaciones = fopen("puntuaciones.txt", "a+");
+    if (fichero_puntuaciones == NULL)
+    {
+        return 0;
+    }
+
+    if (num_jugadores == 2 && (jug[1].puntuacion > jug[0].puntuacion))
+    {
+        fputs("$;", fichero_puntuaciones);
+        fputs(jug[1].nombre, fichero_puntuaciones);
+        fputs(";", fichero_puntuaciones);
+        sprintf(buffer, "%d", jug[1].puntuacion);
+        fputs(buffer, fichero_puntuaciones);
+        fputs(";", fichero_puntuaciones);
+        sprintf(buffer, "%d", jug[1].tiempo_final);
+        fputs(buffer, fichero_puntuaciones);
+    }
+
+    if (num_jugadores == 1)
+    {
+        fputs("#;", fichero_puntuaciones);
+    }
+    else if(num_jugadores == 2 && (jug[0].puntuacion >= jug[1].puntuacion))
+    {
+        fputs("$;", fichero_puntuaciones);
+    }
+
+    fputs(jug[0].nombre, fichero_puntuaciones);
+    fputs(";", fichero_puntuaciones);
+    sprintf(buffer, "%d", jug[0].puntuacion);
+    fputs(buffer, fichero_puntuaciones);
+    fputs(";", fichero_puntuaciones);
+    sprintf(buffer, "%d", jug[0].tiempo_final);
+    fputs(buffer, fichero_puntuaciones);
+    fputs(";", fichero_puntuaciones);
+
+    if (num_jugadores == 2 && (jug[0].puntuacion >= jug[1].puntuacion))
+    {
+        fputs(jug[1].nombre, fichero_puntuaciones);
+        fputs(";", fichero_puntuaciones);
+        sprintf(buffer, "%d", jug[1].puntuacion);
+        fputs(buffer, fichero_puntuaciones);
+        fputs(";", fichero_puntuaciones);
+        sprintf(buffer, "%d", jug[1].tiempo_final);
+        fputs(buffer, fichero_puntuaciones);
+        fputs(";", fichero_puntuaciones);
+    }
+
+    fputs("\n", fichero_puntuaciones);
+    fclose(fichero_puntuaciones);
+
+    return 1;
 }
 
 struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
