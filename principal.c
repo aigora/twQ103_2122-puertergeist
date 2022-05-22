@@ -316,44 +316,44 @@ int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores)
 
     if (num_jugadores == 2 && (jug[1].puntuacion > jug[0].puntuacion))
     {
-        fputs("$;", fichero_puntuaciones);
+        fputs("$ ", fichero_puntuaciones);
         fputs(jug[1].nombre, fichero_puntuaciones);
-        fputs(";", fichero_puntuaciones);
+        fputs(" ", fichero_puntuaciones);
         sprintf(buffer, "%d", jug[1].puntuacion);
         fputs(buffer, fichero_puntuaciones);
-        fputs(";", fichero_puntuaciones);
+        fputs(" ", fichero_puntuaciones);
         sprintf(buffer, "%d", jug[1].tiempo_final);
         fputs(buffer, fichero_puntuaciones);
     }
 
     if (num_jugadores == 1)
     {
-        fputs("#;", fichero_puntuaciones);
+        fputs("# ", fichero_puntuaciones);
     }
     else if(num_jugadores == 2 && (jug[0].puntuacion >= jug[1].puntuacion))
     {
-        fputs("$;", fichero_puntuaciones);
+        fputs("$ ", fichero_puntuaciones);
     }
 
     fputs(jug[0].nombre, fichero_puntuaciones);
-    fputs(";", fichero_puntuaciones);
+    fputs(" ", fichero_puntuaciones);
     sprintf(buffer, "%d", jug[0].puntuacion);
     fputs(buffer, fichero_puntuaciones);
-    fputs(";", fichero_puntuaciones);
+    fputs(" ", fichero_puntuaciones);
     sprintf(buffer, "%d", jug[0].tiempo_final);
     fputs(buffer, fichero_puntuaciones);
-    fputs(";", fichero_puntuaciones);
+    fputs(" ", fichero_puntuaciones);
 
     if (num_jugadores == 2 && (jug[0].puntuacion >= jug[1].puntuacion))
     {
         fputs(jug[1].nombre, fichero_puntuaciones);
-        fputs(";", fichero_puntuaciones);
+        fputs(" ", fichero_puntuaciones);
         sprintf(buffer, "%d", jug[1].puntuacion);
         fputs(buffer, fichero_puntuaciones);
-        fputs(";", fichero_puntuaciones);
+        fputs(" ", fichero_puntuaciones);
         sprintf(buffer, "%d", jug[1].tiempo_final);
         fputs(buffer, fichero_puntuaciones);
-        fputs(";", fichero_puntuaciones);
+        fputs(" ", fichero_puntuaciones);
     }
 
     fputs("\n", fichero_puntuaciones);
