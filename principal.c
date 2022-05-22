@@ -364,6 +364,28 @@ int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores)
 
 struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
 {
+int i;
+	
+fichero_puntuaciones = fopen("puntuaciones.txt","r");
+
+if(fichero_puntuaciones == NULL){
+	printf("Error en la apertura de ficheros\n");
+	return 0;
+}
+
+i=0;
+while(fscanf(fichero_puntuaciones,"%s %d %d",jug[i].nombre,&jug[i].puntuacion,&jug[i].tiempo_final) != EOF){
+	
+	i++;
+}
+
+for(i=0;i<=num_jugadores;i++){
+	
+	printf("%s %d %d\n",jug[i].nombre,jug[i].puntuacion,jug[i].tiempo_final);
+}
+
+fichero_puntuaciones(fclose);
+
 	
 }
 
