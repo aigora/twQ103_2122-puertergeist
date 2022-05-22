@@ -51,7 +51,7 @@ int main()
     do
     {
         if (ver_menu)
-	{
+        {
             /* Menu principal con formato y color */
             printf("%cQu%c quieres hacer ahora? (Introduce una de las 4 opciones):\n\n", 168, 130); // Numeros ASCII para é y ?
             printf("1 - Comenzar a Jugar -- 1 jugador\n");
@@ -61,7 +61,7 @@ int main()
             scanf("%d", &inicio_eleccion);
             fflush(stdin);
             ver_menu = 0;
-	}
+        }
 
         switch (inicio_eleccion)
         {
