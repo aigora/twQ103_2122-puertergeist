@@ -24,8 +24,8 @@ struct Jugador {
 };
 
 struct Puntuaciones {
-	Jugador top10_jugadores_single[10];
-	Jugador top10_jugadores_dobles[2][10];
+	struct Jugador top10_jugadores_single[10];
+	struct Jugador top10_jugadores_dobles[2][10];
 };
 
 /* Declaracion de Funciones auxiliares */
@@ -44,20 +44,25 @@ int main()
 
     int inicio_eleccion = 0;
     int inicio_correcto = 0;
+    int ver_menu = 1;
 
     /* Lanzar banner con titulo y luego breves instrucciones */
 
-    /* Menu principal con formato y color */
-    printf("%cQu%c quieres hacer ahora? (Introduce una de las 3 opciones):\n\n", 168, 130); // Numeros ASCII para é y ?
-    printf("1 - Comenzar a Jugar -- 1 jugador\n");
-    printf("2 - Comenzar a Jugar -- 2 jugadores\n");
-    printf("3 - Ver tabla de las mejores puntuaciones\n");
-    printf("4 - Salir del juego\n");
-    scanf("%d", &inicio_eleccion);
-    fflush(stdin);
-
     do
     {
+        if (ver_menu)
+	{
+            /* Menu principal con formato y color */
+            printf("%cQu%c quieres hacer ahora? (Introduce una de las 4 opciones):\n\n", 168, 130); // Numeros ASCII para é y ?
+            printf("1 - Comenzar a Jugar -- 1 jugador\n");
+            printf("2 - Comenzar a Jugar -- 2 jugadores\n");
+            printf("3 - Ver tabla de las mejores puntuaciones\n");
+            printf("4 - Salir del juego\n");
+            scanf("%d", &inicio_eleccion);
+            fflush(stdin);
+            ver_menu = 0;
+	}
+
         switch (inicio_eleccion)
         {
             case UN_JUGADOR:
@@ -76,9 +81,8 @@ int main()
             }
             case ESTADISTICAS:
             {
-                printf("\nEsta es la tabla de las mejores puntuaciones\n");
-                inicio_correcto = 1;
-                /* Llamar a funcion de mostrar estadisticas del juego (tiempo, puntos, veces jugadas, etc) */
+                LeerEstadisticas();
+                ver_menu = 1;
                 break;
             }
             case SALIR:
@@ -370,7 +374,68 @@ int ComenzarJuego(int num_jugadores)
 
 int LeerEstadisticas(void)
 {
-	
+    int i;
+    time_t tiempo_inicial;
+    struct Puntuaciones estadisticas = LeerPuntuacionJugadoresCSV(2);
+
+    /* Inicializamos el tiempo para mostrar las estadisticas */
+    tiempo_inicial = time(NULL);
+
+    /* Limpiamos la consola */
+    system("cls");
+
+    /* Imprimimos el TOP 10 single */
+    printf("El TOP 10 de los mejores jugadores en solitario es el siguiente:\n\n");
+    for (i=0; i<10; i++)
+    {
+        if (i == 9)
+        {
+            printf("%d%s%s - %d puntos - %d minutos y %d segundos\n", i+1, ". ", estadisticas.top10_jugadores_single[i].nombre, estadisticas.top10_jugadores_single[i].puntuacion, estadisticas.top10_jugadores_single[i].tiempo_final / 60, estadisticas.top10_jugadores_single[i].tiempo_final % 60);
+        }
+        else
+        {
+            printf("%d%s%s - %d puntos - %d minutos y %d segundos\n", i+1, ".  ", estadisticas.top10_jugadores_single[i].nombre, estadisticas.top10_jugadores_single[i].puntuacion, estadisticas.top10_jugadores_single[i].tiempo_final / 60, estadisticas.top10_jugadores_single[i].tiempo_final % 60);
+        }
+    }
+
+    /* temporizador */
+    while((time(NULL) - tiempo_inicial) < 15)
+    {
+        /* esperamos 15 sec */
+    }
+
+    /* Inicializamos el tiempo de nuevo para mostrar las estadisticas de dobles*/
+    tiempo_inicial = time(NULL);
+
+    /* Limpiamos la consola de nuevo */
+    system("cls");
+
+    /* Imprimimos el TOP 10 dobles */
+    printf("El TOP 10 de los mejores jugadores en dobles es el siguiente:\n\n");
+    for (i=0; i<10; i++)
+    {
+        if (i == 9)
+        {
+            printf("%d%s%s - %d pts - %d min y %d seg vs %s - %d pts\n", i+1, ". ", estadisticas.top10_jugadores_dobles[0][i].nombre, estadisticas.top10_jugadores_dobles[0][i].puntuacion, estadisticas.top10_jugadores_dobles[0][i].tiempo_final / 60, estadisticas.top10_jugadores_dobles[0][i].tiempo_final % 60,
+                                                                                    estadisticas.top10_jugadores_dobles[1][i].nombre, estadisticas.top10_jugadores_dobles[1][i].puntuacion);
+        }
+        else
+        {
+            printf("%d%s%s - %d pts - %d min y %d seg vs %s - %d pts\n", i+1, ".  ", estadisticas.top10_jugadores_dobles[0][i].nombre, estadisticas.top10_jugadores_dobles[0][i].puntuacion, estadisticas.top10_jugadores_dobles[0][i].tiempo_final / 60, estadisticas.top10_jugadores_dobles[0][i].tiempo_final % 60,
+                                                                                     estadisticas.top10_jugadores_dobles[1][i].nombre, estadisticas.top10_jugadores_dobles[1][i].puntuacion);
+        }
+    }
+
+    /* temporizador */
+    while((time(NULL) - tiempo_inicial) < 15)
+    {
+        /* esperamos 15 sec */
+    }
+
+    /* Limpiamos la consola antes de volver */
+    system("cls");
+
+    return 1;
 }
 
 int Salir(void)
