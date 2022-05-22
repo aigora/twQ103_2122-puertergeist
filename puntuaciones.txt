@@ -1,7 +1,7 @@
-$;Juan Nadie;100;220;Juan Segundo;50;303;
-#;Juan Nadie;250;220;
-$;Juan Nadie;102;210;Juan Segundo;51;302;
-#;Juan Nadie;201;270;
-#;Juan Nadie;102;204;
-$;Juan Nadie;156;204;Juan Segundo;52;301;
-#;Juan Nadie;300;150;
+$ Juan 100 220 Pedro 50 303
+# Juan 250 220
+$ Juan 102 210 Marcos 51 302
+# Juan 201 270
+# Juan 102 204
+$ Juan 156 204 Laura 52 301
+# Juan 300 150
