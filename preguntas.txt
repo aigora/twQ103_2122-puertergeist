@@ -1,6 +1,6 @@
 $;En el remake de que pelicula de terror japonesa sale Sarah Michelle Gellar?;El grito;The ring;La llamada;La huella;1
 #;En que pelicula se dice la siguiente frase?: 'Y yo soy el Diablo, ahora suelta estas malditas correas';Expediente Warren;La semilla del diablo;El exorcista;El exorcismo de Emily Rose;3
-$;Como se llama el diablo que es el principal villano de la saga 'Expediente Warren'?;Valad;Valam:Valak;Vakal;3
+$;Como se llama el diablo que es el principal villano de la saga 'Expediente Warren'?;Valad;Valam;Valak;Vakal;3
 $;Cuantas entregas tiene la saga de 'La matanza de Texas'?;9;7;6;4;1
 #;En el comienzo de 'El sexto sentido', quien es el que dispara a Malcolm Crowe (Bruce Willis)?;Un ladron;Un antiguo paciente;Su propia esposa;No llega a saberse;2
 $;Como se llama el demonio de la saga 'Paranormal Activity'?;Tobi;Valak;Karras;Luci;1
