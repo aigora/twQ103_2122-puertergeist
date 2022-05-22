@@ -1,6 +1,6 @@
 # [Puertergeist]
 
-[Descripción breve del proyecto a realizar (2-3 frases).]
+Juega solo o contra un oponente. ¿Quién conseguirá más puntos al atravesar las puertas? Atrévete con una terrprífica aventura en la que gana el que acierte más y más rápido.
 
 ## Integrantes del equipo
 
