@@ -11,9 +11,6 @@ Juega solo o contra un oponente. ¿Quién conseguirá más puntos al atravesar l
 
 ## Objetivos del trabajo
 
-[Lista de los objetivos que se persiguen con el trabajo propuesto.]
 Desarrolar un escalofriante juego de preguntas programado en c.
 Juega individual y multijugador (1vs1).
 Utilización de ficheros para guardar puntuaciones.
-
-
