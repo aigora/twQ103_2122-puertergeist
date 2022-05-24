@@ -57,7 +57,7 @@ int main()
         if (ver_menu)
         {
             /* Menu principal con formato y color */
-            printf("%cQu%c quieres hacer ahora? (Introduce una de las 4 opciones):\n\n", 168, 130); // Numeros ASCII para é y ?
+            printf("%cQu%c quieres hacer ahora? (Introduce una de las 4 opciones):\n\n", 168, 130); // Numeros ASCII para Ã© y ?
             printf("1 - Comenzar a Jugar -- 1 jugador\n");
             printf("2 - Comenzar a Jugar -- 2 jugadores\n");
             printf("3 - Ver tabla de las mejores puntuaciones\n");
@@ -71,7 +71,7 @@ int main()
         {
             case UN_JUGADOR:
             {
-                printf("\nBien!!! Has elegido jugar solo. Vamos all%c!!!\n", 160); // Numero ASCII para á
+                printf("\nBien!!! Has elegido jugar solo. Vamos all%c!!!\n", 160); // Numero ASCII para Ã¡
                 inicio_correcto = 1;
                 /* Llamar a funcion de un solo jugador */
                 break;
@@ -91,13 +91,13 @@ int main()
             }
             case SALIR:
             {
-                printf("\nBueno, pues nos vemos dentro de poco. P%csalo bien ah%c fuera!!!\n", 160, 214); // Numeros ASCII para á e í
+                printf("\nBueno, pues nos vemos dentro de poco. P%csalo bien ah%c fuera!!!\n", 160, 214); // Numeros ASCII para Ã¡ e Ã­
                 inicio_correcto = 1;
                 break;
             }
             default:
             {
-                printf("\nOpci%cn erronea. Por favor, introduce 1, 2, 3 o 4:\n", 162); // Numero ASCII para ó
+                printf("\nOpci%cn erronea. Por favor, introduce 1, 2, 3 o 4:\n", 162); // Numero ASCII para Ã³
                 scanf("%d", &inicio_eleccion);
                 fflush(stdin);
             }
@@ -383,31 +383,72 @@ int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores)
 
 struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
 {
-int i;
+    int i,k;
+    char single_doble;
+    struct Jugador jug[2];
+    struct Puntuaciones puntuaciones_jugadores;
 
- FILE *fichero_puntuaciones;
-	
-fichero_puntuaciones = fopen("puntuaciones.txt","r");
+    FILE *fichero_puntuaciones = fopen("puntuaciones.txt","r");
 
-if(fichero_puntuaciones == NULL){
-	printf("Error en la apertura de ficheros\n");
-	exit(-1);
-}
+    if(fichero_puntuaciones == NULL){
+        printf("Error en la apertura de ficheros\n");
+        return puntuaciones_jugadores;
+    }
 
-i=0;
-while(fscanf(fichero_puntuaciones,"%s %d %d",jug[i].nombre,&jug[i].puntuacion,&jug[i].tiempo_final) != EOF){
-	
-	i++;
-}
+    for (k=0;k<10;k++)
+    {
+        puntuaciones_jugadores.top10_jugadores_single[k].nombre[0] = '\0';
+        puntuaciones_jugadores.top10_jugadores_dobles[0][k].nombre[0] = '\0';
+        puntuaciones_jugadores.top10_jugadores_dobles[1][k].nombre[0] = '\0';
+        puntuaciones_jugadores.top10_jugadores_single[k].puntuacion = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[0][k].puntuacion = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[1][k].puntuacion = 0;
+        puntuaciones_jugadores.top10_jugadores_single[k].tiempo_final = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[0][k].tiempo_final = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[1][k].tiempo_final = 0;
+    }
 
-for(i=0;i<=num_jugadores;i++){
-	
-	printf("%s %d %d\n",jug[i].nombre,jug[i].puntuacion,jug[i].tiempo_final);
-}
+    while(fscanf(fichero_puntuaciones,"%c %s %d %d ", &single_doble, jug[0].nombre, &jug[0].puntuacion, &jug[0].tiempo_final) != EOF)
+    {
+        if (single_doble == '$')
+        {
+            fscanf(fichero_puntuaciones,"%s %d %d ", jug[1].nombre, &jug[1].puntuacion, &jug[1].tiempo_final);
+            for (i=0;i<10;i++)
+            {
+                if (jug[0].puntuacion > puntuaciones_jugadores.top10_jugadores_dobles[0][i].puntuacion)
+                {
+                    int j;
+                    for (j = 9; j > i; j--)
+                    {
+                        puntuaciones_jugadores.top10_jugadores_dobles[0][j] = puntuaciones_jugadores.top10_jugadores_dobles[0][j-1];
+                    }
+                    puntuaciones_jugadores.top10_jugadores_dobles[0][i] = jug[0];
+                    puntuaciones_jugadores.top10_jugadores_dobles[1][i] = jug[1];
+                    break;
+                 }
+            }
+        }
+        else if (single_doble == '#')
+        {
+            for (i=0;i<10;i++)
+            {
+                if (jug[0].puntuacion > puntuaciones_jugadores.top10_jugadores_single[i].puntuacion)
+                {
+                    int j;
+                    for (j = 9; j > i; j--)
+                    {
+                        puntuaciones_jugadores.top10_jugadores_single[j] = puntuaciones_jugadores.top10_jugadores_single[j-1];
+                    }
+                    puntuaciones_jugadores.top10_jugadores_single[i] = jug[0];
+                    break;
+                 }
+            }
+        }
+    }
 
-fclose(fichero_puntuaciones);
+    fclose(fichero_puntuaciones);
 
-	
+    return puntuaciones_jugadores;
 }
 
 int ComenzarJuego(int num_jugadores)
