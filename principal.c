@@ -436,36 +436,7 @@ struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
 
 int ComenzarJuego(int num_jugadores)
 {
-int i=0;
- FILE *fichero_preguntas;
- struct Pregunta programa[N];
- 
-    fichero_preguntas = fopen("preguntas.txt","r");
-    if (fichero_preguntas == NULL)
-    {
-        printf("Error en la lectura del fichero preguntas.txt. Fin del programa\n");
-        return 0;
-    }
-    
-    
 
-
-
-	
-while(fscanf(fichero_preguntas,"%c %c %d",&programa[i].pregunta,&programa[i].respuesta_posible,&programa[i].respuesta_correcta) != EOF){
-	
-	i++;
-}
-
-for(i=0;i<22;i++){
-	
-	printf("%c %c %d\n",programa[i].pregunta,programa[i].respuesta_posible,programa[i].respuesta_correcta);
-}
-
-fichero_preguntas(fclose);
-
-	
-	
 		
 }
 
