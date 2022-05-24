@@ -6,6 +6,8 @@
 #define DOS_JUGADORES   2
 #define ESTADISTICAS    3
 #define SALIR           4
+#define N 22            5
+
 
 
 /* Estructuras */
