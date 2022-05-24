@@ -364,29 +364,72 @@ int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores)
 
 struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
 {
-int i;
-	
-fichero_puntuaciones = fopen("puntuaciones.txt","r");
+    int i,k;
+    char single_doble;
+    struct Jugador jug[2];
+    struct Puntuaciones puntuaciones_jugadores;
 
-if(fichero_puntuaciones == NULL){
-	printf("Error en la apertura de ficheros\n");
-	return 0;
-}
+    FILE *fichero_puntuaciones = fopen("puntuaciones.txt","r");
 
-i=0;
-while(fscanf(fichero_puntuaciones,"%s %d %d",jug[i].nombre,&jug[i].puntuacion,&jug[i].tiempo_final) != EOF){
-	
-	i++;
-}
+    if(fichero_puntuaciones == NULL){
+        printf("Error en la apertura de ficheros\n");
+        return puntuaciones_jugadores;
+    }
 
-for(i=0;i<=num_jugadores;i++){
-	
-	printf("%s %d %d\n",jug[i].nombre,jug[i].puntuacion,jug[i].tiempo_final);
-}
+    for (k=0;k<10;k++)
+    {
+        puntuaciones_jugadores.top10_jugadores_single[k].nombre[0] = '\0';
+        puntuaciones_jugadores.top10_jugadores_dobles[0][k].nombre[0] = '\0';
+        puntuaciones_jugadores.top10_jugadores_dobles[1][k].nombre[0] = '\0';
+        puntuaciones_jugadores.top10_jugadores_single[k].puntuacion = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[0][k].puntuacion = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[1][k].puntuacion = 0;
+        puntuaciones_jugadores.top10_jugadores_single[k].tiempo_final = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[0][k].tiempo_final = 0;
+        puntuaciones_jugadores.top10_jugadores_dobles[1][k].tiempo_final = 0;
+    }
 
-fichero_puntuaciones(fclose);
+    while(fscanf(fichero_puntuaciones,"%c %s %d %d ", &single_doble, jug[0].nombre, &jug[0].puntuacion, &jug[0].tiempo_final) != EOF)
+    {
+        if (single_doble == '$')
+        {
+            fscanf(fichero_puntuaciones,"%s %d %d ", jug[1].nombre, &jug[1].puntuacion, &jug[1].tiempo_final);
+            for (i=0;i<10;i++)
+            {
+                if (jug[0].puntuacion > puntuaciones_jugadores.top10_jugadores_dobles[0][i].puntuacion)
+                {
+                    int j;
+                    for (j = 9; j > i; j--)
+                    {
+                        puntuaciones_jugadores.top10_jugadores_dobles[0][j] = puntuaciones_jugadores.top10_jugadores_dobles[0][j-1];
+                    }
+                    puntuaciones_jugadores.top10_jugadores_dobles[0][i] = jug[0];
+                    puntuaciones_jugadores.top10_jugadores_dobles[1][i] = jug[1];
+                    break;
+                 }
+            }
+        }
+        else if (single_doble == '#')
+        {
+            for (i=0;i<10;i++)
+            {
+                if (jug[0].puntuacion > puntuaciones_jugadores.top10_jugadores_single[i].puntuacion)
+                {
+                    int j;
+                    for (j = 9; j > i; j--)
+                    {
+                        puntuaciones_jugadores.top10_jugadores_single[j] = puntuaciones_jugadores.top10_jugadores_single[j-1];
+                    }
+                    puntuaciones_jugadores.top10_jugadores_single[i] = jug[0];
+                    break;
+                 }
+            }
+        }
+    }
 
-	
+    fclose(fichero_puntuaciones);
+
+    return puntuaciones_jugadores;
 }
 
 int ComenzarJuego(int num_jugadores)
