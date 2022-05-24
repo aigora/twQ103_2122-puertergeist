@@ -434,10 +434,51 @@ struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
     return puntuaciones_jugadores;
 }
 
-int ComenzarJuego(int num_jugadores)
+intComenzarJuego(int num_intentos){
+FILE *fichero_preguntas;
+int i;
+float operacion_1,operacion_2,operacion_3,tiempo_parcial,tiempo1,tiempo2,tiempo3,suma_total=0;
+char pregunta_1,pregunta_2,pregunta_3;
+struct Pregunta programa[N];
+fichero_preguntas = fopen("preguntas.txt","r");
+if (fichero_preguntas == NULL)
 {
+printf("Error en la lectura del fichero preguntas.txt. Fin del programa\n");
+return 0;
+}
+i=0;
+while(fscanf(fichero_preguntas,"%c %c %d",&programa[i].pregunta,&programa[i].respuesta_posible,&programa[i].respuesta_correcta) != EOF){
+i++;
+}for(i=0;i<22;i++){
+printf("%c %c %d\n",programa[i].pregunta,programa[i].respuesta_posible,programa[i].respuesta_correcta);
+}fichero_preguntas(fclose);
 
-		
+if(pregunta_1 == 35){
+	operacion_1 = 40-(10*num_intentos);
+	tiempo1=(10-tiempo_parcial)*(operacion_1/10);
+	
+}else if(pregunta_1 == 36){
+	operacion_1= 80-(20*num_intentos);
+	tiempo1=(10-tiempo_parcial)*(operacion_1/10);
+}else if(pregunta_2 == 35){
+	operacion_2 = 80-(20*num_intentos);
+	tiempo2=(20-tiempo_parcial)*(operacion_2/20);
+}else if(pregunta_2 == 36){
+	operacion_2 = 160-(40*num_intentos);
+	tiempo1=(20-tiempo_parcial)*(operacion_2/20);
+}else if(pregunta_3 == 35){
+	operacion_3 = 160-(40*num_intentos);
+	tiempo1=(30-tiempo_parcial)*(operacion_3/30);
+}else if(pregunta_3 == 36){
+	operacion_3 = 280-(70*num_intentos);
+	tiempo1=(30-tiempo_parcial)*(operacion_3/30);
+}
+
+suma_total=(operacion_1+operacion_2+operacion_3)-(tiempo1+tiempo2+tiempo3);
+
+return suma_total;
+
+
 }
 
 int LeerEstadisticas(void)
