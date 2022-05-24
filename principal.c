@@ -49,7 +49,7 @@ int main()
     int ver_menu = 1;
 
     /* Lanzar banner con titulo y luego breves instrucciones */
-
+Banner()
     do
     {
         if (ver_menu)
@@ -109,12 +109,40 @@ int main()
 /* Definicion de funciones auxiliares */
 int Banner(void)
 {
-	
-}
+    char caracter;
 
-int Banner_Salir(void)
-{
-	
+    /* consola con 115 columnas y 32 lineas */
+    system("mode con cols=115 lines=32");
+
+    printf("\n\n\n");
+    printf("\x1B[32m           ||||||  ||   || ||||||| ||||||  |||||| ||||||| ||||||  ||||||  ||||||| |||||| ||||||| |||||| \033[0m\n");
+    printf("\x1B[32m           ||   || ||   || ||      ||   ||   ||   ||      ||   || ||      ||        ||   ||        ||   \033[0m\n");
+    printf("\x1B[32m           ||||||  ||   || ||||||  ||||||    ||   ||||||  ||||||  ||  ||| ||||||    ||   |||||||   ||   \033[0m\n");
+    printf("\x1B[32m           ||      ||   || ||      ||  ||    ||   ||      ||  ||  ||  ||  ||        ||        ||   ||   \033[0m\n");
+    printf("\x1B[32m           ||       |||||  ||||||| ||   ||   ||   ||||||| ||   || ||||||  ||||||| |||||| |||||||   ||   \033[0m\n");
+    printf("\n\n\n           La sabidur%ca no se halla en entender el misterio, sino en aceptar que no se puede entender.\n\n", 214);
+    printf("                                             ''Gregory Maguire''");
+    printf("\x1B[93m\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                      Pulse cualquier tecla para continuar\033[0m");
+    scanf("%c", &caracter);
+    system("cls");
+    printf("\n\n\n");
+    printf("     Bienvenido a Puertergeist, en este juego pondr%cs a prueba tu conocimiento sobre el mundo del terror.\n", 160);
+    printf("     Podr%cs jugar en modo individual o multijugador ademas de tener acceso a la tabla de mejores puntuaciones.\n", 160);
+    printf("\n\n");
+    printf("\x1B[93m                                                 INSTRUCCIONES\033[0m\n\n\n");
+    printf("\x1B[32m     Si juegas solo: \n\n\033[0m");
+    printf("     Son 3 rondas con 2 posibles preguntas en cada ronda, una f%ccil y otra dif%ccil. La pregunta dif%ccil da m%cs  \n", 160, 214, 214, 160);
+    printf("     puntos que la f%ccil y tienes 3 intentos por cada pregunta. El tiempo que tardes en contestar cada pregunta \n", 160);
+    printf("     es otra fuente de puntos, as%c que cuanto m%cs r%cpido contestes, m%cs puntos conseguir%cs.\n\n\n", 214, 160, 160, 160, 160);
+    printf("\x1B[32m     Si juegas multijugador (1 vs 1): \n\n\033[0m");
+    printf("     Son 3 rondas con 2 posibles preguntas en cada ronda, una f%ccil y otra dif%ccil como en la opci%cn individual.\n", 160, 214, 162);
+    printf("     Las rondas se van alternando entre el jugador 1 y el jugador 2. Adem%cs de los puntos por dificultad de las \n", 160);
+    printf("     preguntas y de la rapidez al contestarlas, hay puntos adicionales por contestar m%cs r%cpido que tu rival.\n", 160, 160);
+    printf("\x1B[93m\n\n\n\n\n                                      Pulse cualquier tecla para continuar\033[0m");
+    scanf("%c", &caracter);
+    system("cls");
+
+    return 0;
 }
 
 static unsigned int ContadorLineas(int dificultad)
