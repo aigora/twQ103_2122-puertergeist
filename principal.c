@@ -6,7 +6,6 @@
 #define DOS_JUGADORES   2
 #define ESTADISTICAS    3
 #define SALIR           4
-#define N 22            5
 
 
 
@@ -355,6 +354,7 @@ int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores)
         fputs(" ", fichero_puntuaciones);
         sprintf(buffer, "%d", jug[1].tiempo_final);
         fputs(buffer, fichero_puntuaciones);
+        fputs(" ", fichero_puntuaciones);
     }
 
     if (num_jugadores == 1)
