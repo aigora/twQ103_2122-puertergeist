@@ -399,13 +399,7 @@ struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
     char single_doble;
     struct Jugador jug[2];
     struct Puntuaciones puntuaciones_jugadores;
-
-    FILE *fichero_puntuaciones = fopen("puntuaciones.txt","r");
-
-    if(fichero_puntuaciones == NULL){
-        printf("Error en la apertura de ficheros\n");
-        return puntuaciones_jugadores;
-    }
+    FILE *fichero_puntuaciones;
 
     for (k=0;k<10;k++)
     {
@@ -418,6 +412,13 @@ struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
         puntuaciones_jugadores.top10_jugadores_single[k].tiempo_final = 0;
         puntuaciones_jugadores.top10_jugadores_dobles[0][k].tiempo_final = 0;
         puntuaciones_jugadores.top10_jugadores_dobles[1][k].tiempo_final = 0;
+    }
+
+    fichero_puntuaciones = fopen("puntuaciones.txt","r");
+
+    if(fichero_puntuaciones == NULL){
+        printf("Error en la apertura de ficheros\n");
+        return puntuaciones_jugadores;
     }
 
     while(fscanf(fichero_puntuaciones,"%c %s %d %d ", &single_doble, jug[0].nombre, &jug[0].puntuacion, &jug[0].tiempo_final) != EOF)
