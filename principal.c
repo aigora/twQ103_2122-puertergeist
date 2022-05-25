@@ -462,53 +462,118 @@ struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores)
     return puntuaciones_jugadores;
 }
 
-intComenzarJuego(int num_intentos){
-FILE *fichero_preguntas;
-int i;
-float operacion_1,operacion_2,operacion_3,tiempo_parcial,tiempo1,tiempo2,tiempo3,suma_total=0;
-char pregunta_1,pregunta_2,pregunta_3;
-struct Pregunta programa[N];
-fichero_preguntas = fopen("preguntas.txt","r");
-if (fichero_preguntas == NULL)
+int ComenzarJuego(int num_jugadores)
 {
-printf("Error en la lectura del fichero preguntas.txt. Fin del programa\n");
-return 0;
+    struct Jugador jugadores[2];
+    struct Pregunta pregunta[2][3];
+    int pregunta_eleccion, respuesta, i, j;
+    char caracter;
+    time_t tiempo_parcial;
+    time_t tiempo_inicial[2];
+
+    system("cls");
+    for(j=0; j<num_jugadores;j++){
+        printf("Jugador %d, como quieres que te llame? (Introduce un nombre sin espacios): ", j+1);
+        scanf("%s", jugadores[j].nombre);
+        jugadores[j].puntuacion = 0;
+    }
+    printf("\n\n\n\n\n                     Comenzamos la partida!!!!!");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n                Pulsa una tecla para continuar");
+    scanf("%c", &caracter);
+    system("cls");
+
+    for (i=0; i<3; i++){
+        for (j=0; j < num_jugadores; j++) {
+            int intentos=0;
+            tiempo_parcial = time(NULL);
+
+            if (i == 0)
+                tiempo_inicial[j] = time(NULL);
+
+            do {
+                printf("\n\n%s, has llegado a la puerta %d.\n", jugadores[j].nombre, i+1);
+                printf("Que eliges, una pregunta facil o dificil? (Escribe 1 para facil o 2 para dificil): ");
+                scanf("%d", &pregunta_eleccion);
+            }
+            while(pregunta_eleccion != 1 && pregunta_eleccion != 2);
+
+            pregunta[j][i] = LeerPreguntaCSV(pregunta_eleccion);
+            system("cls");
+            printf ("                                      PREGUNTA %d\n\n", i+1);
+            printf("\n\n%s (escribe 1, 2, 3 o 4)\n1- %s\n2- %s\n3- %s\n4- %s\n", pregunta[j][i].pregunta, pregunta[j][i].respuesta_posible[0], pregunta[j][i].respuesta_posible[1], pregunta[j][i].respuesta_posible[2], pregunta[j][i].respuesta_posible[3]);
+
+            do {
+                scanf("%d", &respuesta);
+                if (respuesta == pregunta[j][i].respuesta_correcta) {
+                    break;
+                }
+                else {
+                    printf("Has fallado!! Sigue probando\n");
+                    intentos++;
+                }
+            }
+            while(respuesta != pregunta[j][i].respuesta_correcta);
+
+            jugadores[j].tiempo_parcial[i] = time(NULL) - tiempo_parcial;
+
+            if (i == 2){
+                jugadores[j].tiempo_final = time(NULL) - tiempo_inicial[j];
+                printf("\n\n Enhorabuena, has acertado!!! Tu camino termina aqui\n");
+            }
+            else{
+                printf("\n\n Enhorabuena, has acertado!!! Pasemos a la siguiente pregunta\n");
+            }
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n                Pulsa una tecla para continuar");
+            scanf("%c", &caracter);
+            system("cls");
+
+            if (intentos > 4)
+                intentos = 4;
+
+            if (jugadores[j].tiempo_parcial[i]>(10*(i+1)))
+                jugadores[j].tiempo_parcial[i]=(10*(i+1));
+
+            if (pregunta_eleccion == 1)
+                    jugadores[j].puntuacion += ((40*(i+1)) - ((10*(i+1)) * intentos)) + ((10*(i+1)) - jugadores[j].tiempo_parcial[i]);
+            else
+                    jugadores[j].puntuacion += ((80*(i+1)) - ((20*(i+1)) * intentos)) + ((10*(i+1)) - jugadores[j].tiempo_parcial[i]);
+
+            if (j == 1) {
+                if (jugadores[j].tiempo_parcial[i] > jugadores[j-1].tiempo_parcial[i])
+                    jugadores[j-1].puntuacion += ((jugadores[j].tiempo_parcial[i] - jugadores[j-1].tiempo_parcial[i]) * 5);
+                else
+                    jugadores[j].puntuacion += ((jugadores[j-1].tiempo_parcial[i] - jugadores[j].tiempo_parcial[i]) * 5);
+            }
+        }
+    }
+
+    for(j=0; j<num_jugadores; j++) {
+        jugadores[j].puntuacion = jugadores[j].puntuacion - jugadores[j].tiempo_final;
+        if (jugadores[j].puntuacion < 0)
+            jugadores[j].puntuacion = 0;
+    }
+
+    if (num_jugadores == 1)
+        printf("%s has conseguido %d puntos en un total de %d minutos y %d segundos\n", jugadores[0].nombre, jugadores[0].puntuacion, jugadores[0].tiempo_final / 60, jugadores[0].tiempo_final % 60);
+    else {
+        if (jugadores[0].puntuacion > jugadores[1].puntuacion)
+            printf("%s has derrotado a %s. Enhorabuena!!!!\n\n", jugadores[0].nombre, jugadores[1].nombre);
+        else
+            printf("%s has derrotado a %s. Enhorabuena!!!!\n\n", jugadores[1].nombre, jugadores[0].nombre);
+
+        printf("Habeis conseguido los siguientes puntos:\n\n");
+        printf("%s: %d puntos en un total de %d minutos y %d segundos\n", jugadores[0].nombre, jugadores[0].puntuacion, jugadores[0].tiempo_final / 60, jugadores[0].tiempo_final % 60);
+        printf("%s: %d puntos en un total de %d minutos y %d segundos\n", jugadores[1].nombre, jugadores[1].puntuacion, jugadores[1].tiempo_final / 60, jugadores[1].tiempo_final % 60);
+    }
+
+    EscribirPuntuacionJugadoresCSV(jugadores, num_jugadores);
+
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n                       Pulsa una tecla para continuar");
+    scanf("%c", &caracter);
+    system("cls");
+
+    return 1;
 }
-i=0;
-while(fscanf(fichero_preguntas,"%c %c %d",&programa[i].pregunta,&programa[i].respuesta_posible,&programa[i].respuesta_correcta) != EOF){
-i++;
-}for(i=0;i<22;i++){
-printf("%c %c %d\n",programa[i].pregunta,programa[i].respuesta_posible,programa[i].respuesta_correcta);
-}fichero_preguntas(fclose);
-
-if(pregunta_1 == 35){
-	operacion_1 = 40-(10*num_intentos);
-	tiempo1=(10-tiempo_parcial)*(operacion_1/10);
-	
-}else if(pregunta_1 == 36){
-	operacion_1= 80-(20*num_intentos);
-	tiempo1=(10-tiempo_parcial)*(operacion_1/10);
-}else if(pregunta_2 == 35){
-	operacion_2 = 80-(20*num_intentos);
-	tiempo2=(20-tiempo_parcial)*(operacion_2/20);
-}else if(pregunta_2 == 36){
-	operacion_2 = 160-(40*num_intentos);
-	tiempo1=(20-tiempo_parcial)*(operacion_2/20);
-}else if(pregunta_3 == 35){
-	operacion_3 = 160-(40*num_intentos);
-	tiempo1=(30-tiempo_parcial)*(operacion_3/30);
-}else if(pregunta_3 == 36){
-	operacion_3 = 280-(70*num_intentos);
-	tiempo1=(30-tiempo_parcial)*(operacion_3/30);
-}
-
-suma_total=(operacion_1+operacion_2+operacion_3)-(tiempo1+tiempo2+tiempo3);
-
-return suma_total;
-
-
-}
-
 int LeerEstadisticas(void)
 {
     int i;
