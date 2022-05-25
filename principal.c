@@ -49,7 +49,8 @@ int main()
     int ver_menu = 1;
 
     /* Lanzar banner con titulo y luego breves instrucciones */
-Banner()
+    Banner();
+
     do
     {
         if (ver_menu)
@@ -70,15 +71,15 @@ Banner()
             case UN_JUGADOR:
             {
                 printf("\nBien!!! Has elegido jugar solo. Vamos all%c!!!\n", 160); // Numero ASCII para á
-                inicio_correcto = 1;
-                /* Llamar a funcion de un solo jugador */
+                ComenzarJuego(1);
+                ver_menu = 1;
                 break;
             }
             case DOS_JUGADORES:
             {
                 printf("\nVaya!. Veo que quieres competencia. Que gane el mejor!!!!\n");
-                inicio_correcto = 1;
-                /* Llamar a funcion multijugador */
+                ComenzarJuego(2);
+                ver_menu = 1;
                 break;
             }
             case ESTADISTICAS:
