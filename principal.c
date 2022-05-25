@@ -31,13 +31,11 @@ struct Puntuaciones {
 
 /* Declaracion de Funciones auxiliares */
 int Banner(void);
-int Banner_Salir(void);
 struct Pregunta LeerPreguntaCSV(int dificultad);
 int EscribirPuntuacionJugadoresCSV(struct Jugador jug[2], int num_jugadores);
 struct Puntuaciones LeerPuntuacionJugadoresCSV(int num_jugadores);
 int ComenzarJuego(int num_jugadores);
 int LeerEstadisticas(void);
-int Salir(void);
 
 /* Funcion principal */
 int main()
@@ -620,12 +618,12 @@ int LeerEstadisticas(void)
     {
         if (i == 9)
         {
-            printf("%d%s%s - %d pts - %d min y %d seg vs %s - %d pts\n", i+1, ". ", estadisticas.top10_jugadores_dobles[0][i].nombre, estadisticas.top10_jugadores_dobles[0][i].puntuacion, estadisticas.top10_jugadores_dobles[0][i].tiempo_final / 60, estadisticas.top10_jugadores_dobles[0][i].tiempo_final % 60,
+            printf("%d%s%s - %d pts vs %s - %d pts\n", i+1, ". ", estadisticas.top10_jugadores_dobles[0][i].nombre, estadisticas.top10_jugadores_dobles[0][i].puntuacion,
                                                                                     estadisticas.top10_jugadores_dobles[1][i].nombre, estadisticas.top10_jugadores_dobles[1][i].puntuacion);
         }
         else
         {
-            printf("%d%s%s - %d pts - %d min y %d seg vs %s - %d pts\n", i+1, ".  ", estadisticas.top10_jugadores_dobles[0][i].nombre, estadisticas.top10_jugadores_dobles[0][i].puntuacion, estadisticas.top10_jugadores_dobles[0][i].tiempo_final / 60, estadisticas.top10_jugadores_dobles[0][i].tiempo_final % 60,
+            printf("%d%s%s - %d pts vs %s - %d pts\n", i+1, ".  ", estadisticas.top10_jugadores_dobles[0][i].nombre, estadisticas.top10_jugadores_dobles[0][i].puntuacion,
                                                                                      estadisticas.top10_jugadores_dobles[1][i].nombre, estadisticas.top10_jugadores_dobles[1][i].puntuacion);
         }
     }
@@ -640,9 +638,4 @@ int LeerEstadisticas(void)
     system("cls");
 
     return 1;
-}
-
-int Salir(void)
-{
-	
 }
