@@ -198,6 +198,9 @@ static struct Pregunta LeerPregunta(int dificultad, int num_aleatorio)
         return pregunta_seleccionada;
     }
 
+    /* Asignamos el numero de pregunta a la pregunta */
+    pregunta_seleccionada.numero_pregunta = num_aleatorio;
+
     /* Nos situamos en la pregunta aleatoria seleccionada */
     while (pregunta_detectada == 0)
     {
@@ -325,6 +328,8 @@ struct Pregunta LeerPreguntaCSV(int dificultad)
 
     /* Leemos la pregunta seleccionada */
     pregunta_seleccionada = LeerPregunta(dificultad, numero_aleatorio);
+
+    fflush(stdin);
 
     return pregunta_seleccionada;
 }
@@ -484,7 +489,7 @@ int ComenzarJuego(int num_jugadores)
 
     for (i=0; i<3; i++){
         for (j=0; j < num_jugadores; j++) {
-            int intentos=0;
+            int intentos=0, repetida;
             tiempo_parcial = time(NULL);
 
             if (i == 0)
@@ -497,7 +502,19 @@ int ComenzarJuego(int num_jugadores)
             }
             while(pregunta_eleccion != 1 && pregunta_eleccion != 2);
 
-            pregunta[j][i] = LeerPreguntaCSV(pregunta_eleccion);
+            /* Si la pregunta sale repetida elegimos otra */
+            do {
+                int k;
+                repetida=0;
+                pregunta[j][i] = LeerPreguntaCSV(pregunta_eleccion);
+                for(k=0; k<i; k++){
+                    if (pregunta[j][i].numero_pregunta == pregunta[j][k].numero_pregunta)
+                        repetida = 1;
+                }
+            }
+            while(repetida == 1);
+            fflush(stdin);
+
             system("cls");
             printf ("                                      PREGUNTA %d\n\n", i+1);
             printf("\n\n%s (escribe 1, 2, 3 o 4)\n1- %s\n2- %s\n3- %s\n4- %s\n", pregunta[j][i].pregunta, pregunta[j][i].respuesta_posible[0], pregunta[j][i].respuesta_posible[1], pregunta[j][i].respuesta_posible[2], pregunta[j][i].respuesta_posible[3]);
