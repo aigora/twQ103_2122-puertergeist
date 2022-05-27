@@ -20,3 +20,4 @@ $;Cual fue la primera pelicula de terror en ser nominada a Mejor Pelicula en los
 $;Los zombis se han convertido en algo habitual en el genero del terror. En que pelicula aparecieron los primeros zombis canibales?;Zombi blanco;El valle de los zombis;La noche de los muertos vivientes;El ejercito de las tinieblas;3
 $;Que saga de peliculas de terror dicen que era maldita despues de una serie de accidentes y tragedias en las que se vieron implicados actores en varias peliculas?;Alien;Poltergeist;Hostel;Carrie;2
 #;El clasico japones 'Ringu' (y su remake en Hollywood 'The ring') se centra alrededor de un artilugio maldito. Cual?;Una cinta de video;Un DVD;Un movil;Un libro;1
+&
