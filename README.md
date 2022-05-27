@@ -11,8 +11,5 @@ Juega solo o contra un oponente. ¿Quién conseguirá más puntos al atravesar l
 
 ## Objetivos del trabajo
 
-Desarrolar un escalofriante juego de preguntas programado en c.
-
-Juega individual y multijugador (1vs1).
-
-Utilización de ficheros para guardar puntuaciones.
+Desarrollar un escalofriante juego de preguntas programado en c. El usuario escoge un nombre y elige entre jugar individualmente o contra un oponente. En cada partida se enfrenta a tres preguntas (puertas), eligiendo el nivel de dificultad (fácil o difícil). Se obtienen puntos en función del número de aciertos y los intentos para conseguirlo, y del tiempo empleado. La puntuación queda grabada y recogida en un ránking con los diez mejores.
+Para ello se hace uso de distintas funciones, lectura y escritura de ficheros y vectores de estructuras.
